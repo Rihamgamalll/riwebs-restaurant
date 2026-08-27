@@ -1,0 +1,4 @@
+'use client';
+import {useState} from 'react'; import {categories,menuItems} from '@/data/menu'; import BurgerCard from './BurgerCard'; import {useLanguage} from './LanguageProvider';
+const key:Record<string,string>={All:'filter.all',Burgers:'filter.burgers',Sandwiches:'filter.sandwiches',Meals:'filter.meals',Sides:'filter.sides',Drinks:'filter.drinks',Sauces:'filter.sauces'};
+export default function MenuExplorer(){const [cat,setCat]=useState<(typeof categories)[number]>('All');const {t}=useLanguage();const items=cat==='All'?menuItems:menuItems.filter(x=>x.category===cat);return <><div className="filters">{categories.map(x=><button key={x} className={cat===x?'active':''} onClick={()=>setCat(x)}>{t(key[x])}</button>)}</div><div className="food-grid menu-grid">{items.map(x=><BurgerCard item={x} key={x.id}/>)}</div></>}

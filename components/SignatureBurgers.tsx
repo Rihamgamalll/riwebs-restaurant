@@ -1,0 +1,3 @@
+'use client';
+import Link from 'next/link';import BurgerCard from './BurgerCard';import {menuItems} from '@/data/menu';import {useLanguage} from './LanguageProvider';
+export default function SignatureBurgers(){const items=menuItems.filter(x=>x.category==='Burgers').slice(0,4);const {t}=useLanguage();const lines=t('home.choose').split('\n');return <section className="section signatures"><div className="section-head"><div><span className="section-kicker">{t('home.signature')}</span><h2>{lines.map((x,i)=><span key={x}>{x}{i<lines.length-1?<br/>:null}</span>)}</h2></div><Link href="/burgers">{t('home.view')}</Link></div><div className="food-grid">{items.map(x=><BurgerCard key={x.id} item={x}/>)}</div></section>}

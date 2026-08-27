@@ -1,0 +1,38 @@
+REPLACE THESE PNG FILES WITH YOUR OWN TRANSPARENT PRODUCT PHOTOS.
+KEEP THE FILENAMES EXACTLY THE SAME.
+
+BURGERS (4)
+burger-classic.png
+burger-double.png
+burger-crispy.png
+burger-signature.png
+
+SANDWICHES (4)
+sandwich-zinger.png
+sandwich-chicken.png
+sandwich-steak.png
+sandwich-club.png
+
+DRINKS (6)
+drink-pepsi.png
+drink-mountain-dew.png
+drink-redbull.png
+drink-twist.png
+drink-sprite.png
+drink-water.png
+
+SIDES / ADDITIONS (6)
+side-fries.png
+side-coleslaw.png
+side-onion-rings.png
+side-mozzarella-sticks.png
+side-loaded-fries.png
+side-chicken-strips.png
+
+SAUCES / EXTRA ADD-ONS (4)
+addon-house-sauce.png
+addon-cheese-sauce.png
+addon-bbq-sauce.png
+addon-jalapeno.png
+
+Best format: transparent PNG, centered object, similar camera angle, no background, at least 1200px on the longest side.

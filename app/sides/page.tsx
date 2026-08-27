@@ -1,0 +1,2 @@
+import PageHero from '@/components/PageHero';import BurgerCard from '@/components/BurgerCard';import {menuItems} from '@/data/menu';
+export default function Sides(){const s=menuItems.filter(x=>x.category==='Sides'||x.category==='Sauces');return <main><PageHero kicker="page.sides.kicker" title="page.sides.title" copy="page.sides.copy"/><section className="section"><div className="food-grid menu-grid">{s.map(x=><BurgerCard key={x.id} item={x}/>)}</div></section></main>}

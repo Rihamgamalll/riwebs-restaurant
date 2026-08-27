@@ -1,0 +1,13 @@
+import express from 'express';
+import cors from 'cors';
+import pg from 'pg';
+const app=express(); const PORT=process.env.PORT||8080; const PHONE='201013290912';
+const allowed=(process.env.FRONTEND_URL||'').split(',').map(x=>x.trim()).filter(Boolean);
+app.use(cors({origin:(origin,cb)=>!origin||!allowed.length||allowed.includes(origin)?cb(null,true):cb(new Error('CORS blocked'))}));
+app.use(express.json({limit:'100kb'}));
+let pool=null;
+if(process.env.DATABASE_URL){pool=new pg.Pool({connectionString:process.env.DATABASE_URL,ssl:process.env.NODE_ENV==='production'?{rejectUnauthorized:false}:undefined});pool.query(`CREATE TABLE IF NOT EXISTS orders (id text PRIMARY KEY, payload jsonb NOT NULL, total numeric NOT NULL, created_at timestamptz NOT NULL DEFAULT now())`).catch(console.error)}
+const safe=(v,max=120)=>String(v??'').replace(/[<>]/g,'').slice(0,max);
+app.get('/health',(_,res)=>res.json({ok:true,service:'riwebs-order-api'}));
+app.post('/api/orders',async(req,res)=>{try{const body=req.body||{};const lang=body.language==='ar'?'ar':'en';const items=Array.isArray(body.items)?body.items.slice(0,40):[];if(!items.length)return res.status(400).json({error:'Order is empty'});let total=0;const normalized=items.map((x,i)=>{const qty=Math.max(1,Math.min(50,Number(x.qty)||1));const unitPrice=Math.max(0,Number(x.unitPrice)||0);total+=qty*unitPrice;return{id:safe(x.id,80),name:safe(x.name),displayName:safe(x.displayName||x.name),qty,unitPrice,size:safe(x.size,60),type:safe(x.type,60),extras:Array.isArray(x.extras)?x.extras.slice(0,20).map(v=>safe(v,60)):[]}});const id=`RW-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;const lines=normalized.map((x,i)=>{const opts=[x.size,x.type,...x.extras].filter(Boolean).join(' · ');return `${i+1}. ${x.displayName} ×${x.qty}\n   ${opts||(lang==='ar'?'عادي':'Standard')}\n   EGP ${x.qty*x.unitPrice}`});const message=lang==='ar'?`مرحبًا RiWebs 👋\nعايز/ة أأكد الأوردر ده (${id}):\n\n${lines.join('\n\n')}\n\nالإجمالي: EGP ${total}\n\nمن فضلك أكد التوفر وتفاصيل الاستلام/التوصيل.\nالقاهرة، مصر`:`Hello RiWebs 👋\nI would like to confirm this order (${id}):\n\n${lines.join('\n\n')}\n\nTotal: EGP ${total}\n\nPlease confirm availability and pickup/delivery details.\nCairo, Egypt`;if(pool)await pool.query('INSERT INTO orders(id,payload,total) VALUES($1,$2,$3)',[id,JSON.stringify({language:lang,items:normalized}),total]);res.json({ok:true,orderId:id,total,message,whatsappUrl:`https://wa.me/${PHONE}?text=${encodeURIComponent(message)}`});}catch(e){console.error(e);res.status(500).json({error:'Could not create order'})}});
+app.listen(PORT,()=>console.log(`RiWebs API listening on ${PORT}`));
