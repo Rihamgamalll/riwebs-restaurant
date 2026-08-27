@@ -444,30 +444,39 @@ html[dir="rtl"] .v13-box-status{right:auto;left:4.6vw;text-align:right}
   display: none !important;
 }
 /* =========================================================
-   MOBILE BURGER — FINAL POSITION & SIZE
+   MOBILE BURGER — FINAL VISUAL TUNING
+   ONLY MOBILE
    ========================================================= */
 
    @media (max-width: 760px) {
 
-    /* البرجر وهو متفكك قبل ما يتكوّن */
+    /* =====================================
+       1) EXPLODED BURGER
+       وهو متفكك أثناء الـ animation
+       ===================================== */
+  
     .v13-rig {
       left: 51%;
-      top: 62%;
-      width: 76vw;
-      height: 76vw;
+      top: 61%;
+      width: 70vw;
+      height: 70vw;
     }
   
     .v13-layer {
-      top: calc(50% + (var(--y) * .62));
-      width: 54vw;
+      top: calc(50% + (var(--y) * .56));
+      width: 49vw;
     }
   
   
-    /* البرجر بعد ما يتكوّن بالكامل */
+    /* =====================================
+       2) FINAL ASSEMBLED BURGER
+       بعد ما البرجر يتكوّن بالكامل
+       ===================================== */
+  
     .v13-final-burger {
       left: 50%;
-      top: 68%;
-      width: 58vw;
+      top: 70%;
+      width: 62vw;
     }
   
   }
