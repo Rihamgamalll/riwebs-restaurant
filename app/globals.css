@@ -443,3 +443,110 @@ html[dir="rtl"] .v13-box-status{right:auto;left:4.6vw;text-align:right}
 .mobile-lang {
   display: none !important;
 }
+/* =========================================================
+   FINAL MOBILE HERO TUNING
+   Mobile only — Desktop stays unchanged
+   ========================================================= */
+
+   @media (max-width: 760px) {
+
+    /* Mobile background */
+    .v13-bg {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, .34) 0%,
+          rgba(0, 0, 0, .18) 44%,
+          rgba(0, 0, 0, .72) 100%
+        ),
+        url('/assets/background-mobile.png') center / cover no-repeat;
+  
+      transform: none;
+    }
+  
+    /* Background darkness */
+    .v13-vignette {
+      box-shadow:
+        inset 0 0 100px 35px rgba(0, 0, 0, .66);
+    }
+  
+    /* Main hero text */
+    .v13-copy {
+      top: 13%;
+      width: 82vw;
+    }
+  
+    .v13-copy h1 {
+      font-size: 13.5vw;
+    }
+  
+    .v13-copy p {
+      max-width: 250px;
+      font-size: 10.5px;
+    }
+  
+  
+    /* =====================================================
+       BURGER — MOBILE SIZE & POSITION
+       ===================================================== */
+  
+    .v13-final-burger {
+      left: 50%;
+      top: 64%;
+      width: 58vw;
+    }
+  
+  
+    /* Burger layers during animation */
+    .v13-rig {
+      left: 51%;
+      top: 62%;
+      width: 82vw;
+      height: 82vw;
+    }
+  
+    .v13-layer {
+      top: calc(50% + (var(--y) * .62));
+      width: 58vw;
+    }
+  
+  
+    /* =====================================================
+       PACKING SECTION
+       ===================================================== */
+  
+    .v13-box-stage {
+      left: 50%;
+      top: 69%;
+      width: 118vw;
+    }
+  
+    .v13-pack-copy {
+      top: 11%;
+      width: 88vw;
+    }
+  
+    .v13-pack-copy p {
+      max-width: 240px;
+    }
+  
+    .v13-empty-floor {
+      left: 18.8%;
+      right: 13.8%;
+      top: 43.8%;
+      bottom: 19.2%;
+    }
+  
+    .v13-empty-front:before {
+      font-size: 8vw;
+    }
+  
+  
+    /* =====================================================
+       MOBILE CART
+       ===================================================== */
+  
+    .cart-drawer {
+      width: min(94vw, 410px);
+    }
+  }
