@@ -480,3 +480,96 @@ html[dir="rtl"] .v13-box-status{right:auto;left:4.6vw;text-align:right}
     }
   
   }
+  
+/* =========================================================
+   MOBILE INGREDIENT LEGEND — FINAL
+   Shows burger parts on mobile without changing desktop.
+   Works with the updated PackJourney GSAP mobile timeline.
+   ========================================================= */
+@media (max-width: 760px) {
+  .v13-legend {
+    display: block !important;
+    position: absolute;
+    right: 8px;
+    left: auto;
+    top: 54%;
+    width: 136px;
+    height: 360px;
+    transform: translateY(-50%);
+    z-index: 60;
+    padding: 10px 8px;
+    background: linear-gradient(180deg, rgba(5,4,3,.74), rgba(5,4,3,.44));
+    border: 1px solid rgba(213,169,71,.18);
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 14px 35px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.03);
+    pointer-events: none;
+  }
+
+  .v13-legend-row {
+    position: absolute;
+    left: 8px;
+    top: calc(50% + (var(--ly) * .50));
+    width: calc(100% - 16px);
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: 18px 18px 25px 1fr;
+    align-items: center;
+    gap: 4px;
+    font-size: 6.7px;
+    letter-spacing: .08em;
+    font-weight: 900;
+    color: #f0e9dd;
+    line-height: 1;
+    will-change: transform, opacity;
+  }
+
+  .v13-legend-row b {
+    color: #c41620;
+    font-size: 6.5px;
+    font-weight: 950;
+  }
+
+  .v13-legend-row > i {
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: linear-gradient(90deg, #7c241d, #d9ad3e);
+  }
+
+  .v13-mini {
+    position: relative;
+    width: 25px;
+    height: 21px;
+  }
+
+  .v13-mini img {
+    object-fit: contain !important;
+    filter: drop-shadow(0 3px 3px rgba(0,0,0,.5)) saturate(1.08);
+  }
+
+  .v13-legend-row span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 6.4px;
+    letter-spacing: .07em;
+  }
+
+  /* Keep Arabic layout clean on mobile too. */
+  html[dir="rtl"] .v13-legend {
+    right: auto;
+    left: 8px;
+  }
+
+  html[dir="rtl"] .v13-legend-row {
+    grid-template-columns: 1fr 25px 18px 18px;
+    text-align: right;
+  }
+
+  html[dir="rtl"] .v13-legend-row span { grid-column: 1; }
+  html[dir="rtl"] .v13-legend-row .v13-mini { grid-column: 2; }
+  html[dir="rtl"] .v13-legend-row > i { grid-column: 3; }
+  html[dir="rtl"] .v13-legend-row > b { grid-column: 4; }
+}
