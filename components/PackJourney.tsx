@@ -172,7 +172,6 @@ export default function PackJourney() {
             0
           )
 
-
           .fromTo(
             layerEls,
             {
@@ -188,7 +187,6 @@ export default function PackJourney() {
             .02
           )
 
-
           .fromTo(
             legendEls,
             {
@@ -203,7 +201,6 @@ export default function PackJourney() {
             },
             .05
           )
-
 
           /* Assemble burger layers */
           .to(
@@ -221,7 +218,6 @@ export default function PackJourney() {
             .55
           )
 
-
           /* Legend follows ingredients */
           .to(
             legendEls,
@@ -237,7 +233,6 @@ export default function PackJourney() {
             .55
           )
 
-
           .to(
             '.v13-scroll',
             {
@@ -246,7 +241,6 @@ export default function PackJourney() {
             },
             .75
           )
-
 
           .to(
             layerEls,
@@ -258,7 +252,6 @@ export default function PackJourney() {
             1.18
           )
 
-
           .to(
             '.v13-final-burger',
             {
@@ -268,7 +261,6 @@ export default function PackJourney() {
             },
             1.19
           )
-
 
           .to(
             '.v13-copy,.v13-legend',
@@ -280,7 +272,6 @@ export default function PackJourney() {
             1.52
           )
 
-
           .to(
             '.v13-final-burger',
             {
@@ -291,7 +282,6 @@ export default function PackJourney() {
             1.55
           )
 
-
           .to(
             '.v13-pack',
             {
@@ -300,7 +290,6 @@ export default function PackJourney() {
             },
             1.58
           )
-
 
           .fromTo(
             '.v13-pack-copy',
@@ -316,7 +305,6 @@ export default function PackJourney() {
             1.6
           )
 
-
           .to(
             '.v13-ready-box',
             {
@@ -328,7 +316,6 @@ export default function PackJourney() {
             1.62
           )
 
-
           .to(
             '.v13-ready-box',
             {
@@ -337,7 +324,6 @@ export default function PackJourney() {
             },
             1.88
           )
-
 
           .to(
             '.v13-ready-box',
@@ -349,7 +335,6 @@ export default function PackJourney() {
             2.42
           )
 
-
           .to(
             '.v13-closed',
             {
@@ -360,7 +345,6 @@ export default function PackJourney() {
             },
             2.46
           )
-
 
           .to(
             '.v13-final-copy',
@@ -398,6 +382,10 @@ export default function PackJourney() {
 
 
         /* Legend starts hidden */
+        gsap.set('.v13-legend', {
+          autoAlpha: 1
+        });
+
         gsap.set(legendEls, {
           autoAlpha: 0,
           x: 12
@@ -437,16 +425,16 @@ export default function PackJourney() {
           )
 
 
-          /* Legend appears */
+          /* Legend appears a little later */
           .to(
             legendEls,
             {
               autoAlpha: 1,
               x: 0,
               stagger: .015,
-              duration: .25
+              duration: .28
             },
-            .04
+            .18
           )
 
 
@@ -471,7 +459,7 @@ export default function PackJourney() {
           )
 
 
-          /* Legend moves with burger */
+          /* Legend follows burger movement */
           .to(
             legendEls,
             {
@@ -490,23 +478,24 @@ export default function PackJourney() {
           )
 
 
-          /* Hide individual burger layers */
+          /* Legend disappears slightly before final burger */
+          .to(
+            '.v13-legend',
+            {
+              autoAlpha: 0,
+              x: 8,
+              duration: .18
+            },
+            .82
+          )
+
+
+          /* Hide exploded layers */
           .to(
             layerEls,
             {
               autoAlpha: 0,
               duration: .12
-            },
-            .86
-          )
-
-
-          /* Hide ingredient legend */
-          .to(
-            '.v13-legend',
-            {
-              autoAlpha: 0,
-              duration: .14
             },
             .86
           )
@@ -731,7 +720,6 @@ export default function PackJourney() {
 
       {/* ========================================
           INGREDIENT LEGEND
-          Desktop + Mobile
           ======================================== */}
 
       <div className="v13-legend">

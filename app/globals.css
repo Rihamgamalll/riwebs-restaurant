@@ -486,90 +486,135 @@ html[dir="rtl"] .v13-box-status{right:auto;left:4.6vw;text-align:right}
    Shows burger parts on mobile without changing desktop.
    Works with the updated PackJourney GSAP mobile timeline.
    ========================================================= */
-@media (max-width: 760px) {
-  .v13-legend {
-    display: block !important;
-    position: absolute;
-    right: 8px;
-    left: auto;
-    top: 54%;
-    width: 136px;
-    height: 360px;
-    transform: translateY(-50%);
-    z-index: 60;
-    padding: 10px 8px;
-    background: linear-gradient(180deg, rgba(5,4,3,.74), rgba(5,4,3,.44));
-    border: 1px solid rgba(213,169,71,.18);
-    border-radius: 14px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 14px 35px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.03);
-    pointer-events: none;
-  }
+   @media (max-width: 760px) {
 
-  .v13-legend-row {
-    position: absolute;
-    left: 8px;
-    top: calc(50% + (var(--ly) * .50));
-    width: calc(100% - 16px);
-    transform: translateY(-50%);
-    display: grid;
-    grid-template-columns: 18px 18px 25px 1fr;
-    align-items: center;
-    gap: 4px;
-    font-size: 6.7px;
-    letter-spacing: .08em;
-    font-weight: 900;
-    color: #f0e9dd;
-    line-height: 1;
-    will-change: transform, opacity;
+    /* القائمة نفسها */
+    .v13-legend {
+      display: block !important;
+  
+      position: absolute;
+      right: 5px;
+      top: 58%;
+  
+      width: 108px;
+      height: 310px;
+  
+      transform: translateY(-50%);
+      z-index: 58;
+  
+      padding: 0;
+  
+      /* شيلنا الصندوق البشع */
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      box-shadow: none;
+  
+      pointer-events: none;
+    }
+  
+  
+    /* كل سطر */
+    .v13-legend-row {
+      position: absolute;
+  
+      left: 0;
+      top: calc(50% + (var(--ly) * .40));
+  
+      width: 100%;
+  
+      transform: translateY(-50%);
+  
+      display: grid;
+  
+      grid-template-columns:
+        14px
+        13px
+        22px
+        1fr;
+  
+      align-items: center;
+  
+      gap: 3px;
+  
+      font-size: 5.8px;
+      letter-spacing: .045em;
+      font-weight: 900;
+  
+      color: #f4eee4;
+  
+      line-height: 1;
+  
+      text-shadow:
+        0 2px 4px rgba(0,0,0,.9),
+        0 0 7px rgba(0,0,0,.55);
+  
+      will-change: transform, opacity;
+    }
+  
+  
+    /* 01 02 03 */
+    .v13-legend-row b {
+      font-size: 5.7px;
+      color: #c31820;
+      font-weight: 950;
+    }
+  
+  
+    /* الخط الذهبي */
+    .v13-legend-row > i {
+      display: block;
+      width: 13px;
+      height: 1px;
+  
+      background: linear-gradient(
+        90deg,
+        rgba(140,41,30,.75),
+        #d4aa46
+      );
+    }
+  
+  
+    /* صورة المكوّن */
+    .v13-mini {
+      position: relative;
+      width: 22px;
+      height: 16px;
+    }
+  
+    .v13-mini img {
+      object-fit: contain !important;
+  
+      filter:
+        drop-shadow(0 2px 3px rgba(0,0,0,.7))
+        saturate(1.08);
+    }
+  
+  
+    /* اسم المكوّن */
+    .v13-legend-row span {
+      font-size: 5.6px;
+      letter-spacing: .035em;
+  
+      white-space: nowrap;
+  
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+  
+    /* نقل البرجر سنة شمال وقت الطبقات
+       عشان نسيب نفس للقائمة */
+    .v13-rig {
+      left: 47.5%;
+    }
+  
+  
+    /* البرجر النهائي يرجع للنص */
+    .v13-final-burger {
+      left: 50%;
+    }
+  
   }
-
-  .v13-legend-row b {
-    color: #c41620;
-    font-size: 6.5px;
-    font-weight: 950;
-  }
-
-  .v13-legend-row > i {
-    display: block;
-    width: 18px;
-    height: 1px;
-    background: linear-gradient(90deg, #7c241d, #d9ad3e);
-  }
-
-  .v13-mini {
-    position: relative;
-    width: 25px;
-    height: 21px;
-  }
-
-  .v13-mini img {
-    object-fit: contain !important;
-    filter: drop-shadow(0 3px 3px rgba(0,0,0,.5)) saturate(1.08);
-  }
-
-  .v13-legend-row span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 6.4px;
-    letter-spacing: .07em;
-  }
-
-  /* Keep Arabic layout clean on mobile too. */
-  html[dir="rtl"] .v13-legend {
-    right: auto;
-    left: 8px;
-  }
-
-  html[dir="rtl"] .v13-legend-row {
-    grid-template-columns: 1fr 25px 18px 18px;
-    text-align: right;
-  }
-
-  html[dir="rtl"] .v13-legend-row span { grid-column: 1; }
-  html[dir="rtl"] .v13-legend-row .v13-mini { grid-column: 2; }
-  html[dir="rtl"] .v13-legend-row > i { grid-column: 3; }
-  html[dir="rtl"] .v13-legend-row > b { grid-column: 4; }
-}
