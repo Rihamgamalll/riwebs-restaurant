@@ -5,9 +5,9 @@ import Footer from '@/components/Footer';
 import { CartProvider } from '@/components/CartProvider';
 import CartDrawer from '@/components/CartDrawer';
 import { LanguageProvider } from '@/components/LanguageProvider';
+import GlobalMotion from '@/components/GlobalMotion';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+const siteUrl = 'https://riwebs-restaurant.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -16,22 +16,25 @@ export const metadata: Metadata = {
     template: '%s | RiWebs Restaurant',
   },
   description: 'Premium burgers, crispy fries and complete meals from RiWebs Restaurant.',
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'RiWebs Restaurant — Built for the Craving',
     description: 'Premium burgers, crispy fries and complete meals from RiWebs Restaurant.',
+    url: siteUrl,
+    siteName: 'RiWebs Restaurant',
     type: 'website',
     images: [{
-      url: '/assets/background.png',
-      width: 1672,
-      height: 941,
-      alt: 'RiWebs Restaurant home experience',
+      url: '/social-preview-v2.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'RiWebs Restaurant signature burger home experience',
     }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'RiWebs Restaurant — Built for the Craving',
     description: 'Premium burgers, crispy fries and complete meals from RiWebs Restaurant.',
-    images: ['/assets/background.png'],
+    images: ['/social-preview-v2.jpg'],
   },
   icons: { icon: '/branding/riwebs-logo.png' },
 };
@@ -40,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <GlobalMotion />
         <LanguageProvider>
           <CartProvider>
             <Navbar />

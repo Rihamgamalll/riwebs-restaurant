@@ -30,7 +30,16 @@ export default function PackJourney() {
       const mm = gsap.matchMedia();
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      if (reduced) {
+        gsap.set('.v15-layer', { autoAlpha: 1 });
+        gsap.set('.v15-final-burger', { autoAlpha: 0 });
+      }
+
       if (!reduced) {
+        gsap.set('.v15-layer', { autoAlpha: 0 });
+        gsap.set('.v15-final-burger', { autoAlpha: 0 });
+        gsap.fromTo('.v15-hero-bg', { scale: 1.12, filter: 'brightness(.55)' }, { scale: 1.02, filter: 'brightness(1)', duration: 1.6, ease: 'expo.out' });
+        gsap.fromTo('.v15-orbit', { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1.25, stagger: .12, ease: 'expo.out' });
         gsap.fromTo('.v15-kicker', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .65, ease: 'power3.out', delay: .12 });
         gsap.fromTo('.v15-title-line', { yPercent: 110, rotate: 2 }, { yPercent: 0, rotate: 0, duration: .9, stagger: .09, ease: 'expo.out', delay: .14 });
         gsap.fromTo('.v15-copy p', { y: 24, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .75, ease: 'power3.out', delay: .45 });
@@ -52,6 +61,7 @@ export default function PackJourney() {
         gsap.fromTo('.v15-legend-row', { x: 30, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .65, stagger: .045, delay: .72, ease: 'power3.out' });
         gsap.to('.v15-ember', { y: -38, x: 'random(-14,14)', opacity: .15, duration: 'random(1.6,3.2)', repeat: -1, yoyo: true, stagger: .18, ease: 'sine.inOut' });
         gsap.to('.v15-glow', { scale: 1.1, opacity: .72, duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+        gsap.to('.v15-rig', { y: -7, duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
       }
 
       mm.add('(min-width: 761px)', () => {

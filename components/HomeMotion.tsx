@@ -10,55 +10,55 @@ export default function HomeMotion() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = gsap.context(() => {
+      const reveal = (selector:string, trigger:string, extra:gsap.TweenVars = {}) => {
+        gsap.fromTo(selector,
+          { y: 54, autoAlpha: 0, scale: .97 },
+          { y: 0, autoAlpha: 1, scale: 1, duration: .82, stagger: .08, ease: 'power3.out', immediateRender:false, ...extra,
+            scrollTrigger:{ trigger, start:'top 88%', once:true } }
+        );
+      };
+
       gsap.utils.toArray<HTMLElement>('.section-head').forEach((head) => {
-        gsap.from(head.children, {
-          y: 46,
-          autoAlpha: 0,
-          duration: .85,
-          stagger: .12,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: head, start: 'top 84%' },
+        gsap.fromTo(head.children,
+          { y: 34, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: .75, stagger: .1, ease:'power3.out', immediateRender:false,
+            scrollTrigger:{ trigger:head, start:'top 90%', once:true } }
+        );
+      });
+
+      reveal('.signatures .food-card', '.signatures .food-grid', { rotateX:0 });
+      reveal('.category-card', '.category-grid');
+
+      gsap.utils.toArray<HTMLElement>('.food-card').forEach((card, index) => {
+        gsap.to(card, {
+          y: index % 2 ? -12 : -7,
+          ease:'none',
+          scrollTrigger:{ trigger:card, start:'top bottom', end:'bottom top', scrub:.8 }
         });
       });
 
-      gsap.from('.signatures .food-card', {
-        y: 75,
-        rotateX: 8,
-        autoAlpha: 0,
-        scale: .94,
-        duration: .9,
-        stagger: .1,
-        ease: 'back.out(1.25)',
-        scrollTrigger: { trigger: '.signatures .food-grid', start: 'top 82%' },
-      });
-
-      gsap.from('.category-card', {
-        y: 90,
-        rotate: (i) => i % 2 ? 2.4 : -2.4,
-        autoAlpha: 0,
-        scale: .92,
-        duration: .95,
-        stagger: .09,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.category-grid', start: 'top 82%' },
-      });
-
-      gsap.utils.toArray<HTMLElement>('.category-art').forEach((art) => {
+      gsap.utils.toArray<HTMLElement>('.category-art').forEach((art, index) => {
         gsap.to(art, {
-          yPercent: -9,
-          ease: 'none',
-          scrollTrigger: { trigger: art, start: 'top bottom', end: 'bottom top', scrub: .8 },
+          yPercent: index % 2 ? -7 : -11,
+          rotate: index % 2 ? 1.2 : -1.2,
+          ease:'none',
+          scrollTrigger:{ trigger:art, start:'top bottom', end:'bottom top', scrub:.85 }
         });
       });
 
-      gsap.from('.manifesto > *', {
-        y: 52,
-        autoAlpha: 0,
-        duration: 1,
-        stagger: .14,
-        ease: 'power4.out',
-        scrollTrigger: { trigger: '.manifesto', start: 'top 78%' },
+      gsap.fromTo('.manifesto > *',
+        { y: 44, autoAlpha: 0 },
+        { y:0, autoAlpha:1, duration:.9, stagger:.12, ease:'power4.out', immediateRender:false,
+          scrollTrigger:{ trigger:'.manifesto', start:'top 88%', once:true } }
+      );
+
+      gsap.to('.manifesto h2', {
+        backgroundPositionX:'100%',
+        ease:'none',
+        scrollTrigger:{trigger:'.manifesto', start:'top bottom', end:'bottom top', scrub:1}
       });
+
+      ScrollTrigger.refresh();
     });
 
     return () => ctx.revert();
